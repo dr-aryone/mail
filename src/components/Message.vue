@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import {AppContentDetails} from 'nextcloud-vue'
 import {generateUrl} from 'nextcloud-server/dist/router'
 
