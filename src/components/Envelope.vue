@@ -10,29 +10,31 @@
 			:data-starred="data.flags.flagged ? 'true' : 'false'"
 			@click.prevent="onToggleFlagged"
 		></div>
-		<div class="app-content-list-item-icon">
+		<template slot="icon">
 			<Avatar :display-name="sender" :email="senderEmail" />
-		</div>
-		<div class="app-content-list-item-line-one" :title="sender">
-			{{ sender }}
-		</div>
-		<div class="app-content-list-item-line-two" :title="data.subject">
-			<span v-if="data.flags.answered" class="icon-reply" />
-			<span v-if="data.flags.hasAttachments" class="icon-public icon-attachment" />
+		</template>
+		<template slot="line-one">
+			<span :title="sender">{{ sender }}</span>
+		</template>
+		<template slot="line-two">
+			<span v-if="data.flags.answered" class="icon-reply"></span>
+			<span v-if="data.flags.hasAttachments" class="icon-public icon-attachment"></span>
 			<span v-if="draft" class="draft">
 				<em>{{ t('mail', 'Draft: ') }}</em>
 			</span>
-			{{ data.subject }}
-		</div>
-		<div class="app-content-list-item-details date">
+			<span :title="data.subject">{{ data.subject }}</span>
+		</template>
+		<template slot="details">
 			<Moment :timestamp="data.dateInt" />
-		</div>
-		<Actions class="app-content-list-item-menu" menu-align="right">
-			<ActionButton icon="icon-mail" @click="onToggleSeen">{{
-				data.flags.unseen ? t('mail', 'Mark read') : t('mail', 'Mark unread')
-			}}</ActionButton>
-			<ActionButton icon="icon-delete" @click="onDelete">{{ t('mail', 'Delete') }}</ActionButton>
-		</Actions>
+		</template>
+		<template slot="menu">
+			<Actions menu-align="right">
+				<ActionButton icon="icon-mail" @click="onToggleSeen">{{
+					data.flags.unseen ? t('mail', 'Mark read') : t('mail', 'Mark unread')
+					}}</ActionButton>
+				<ActionButton icon="icon-delete" @click="onDelete">{{ t('mail', 'Delete') }}</ActionButton>
+			</Actions>
+		</template>
 	</AppContentListItem>
 </template>
 
